@@ -6,9 +6,17 @@ services:
     container_name: laravel-app
     volumes:
       - ../laravel:/var/www/html
+      - ./entrypoint.sh:/entrypoint.sh
     working_dir: /var/www/html
     depends_on:
       - sqlserver
+    entrypoint: ["/bin/bash", "/entrypoint.sh"]
+    environment:
+      SA_PASSWORD: "ABj!010359"
+      DB_HOST: "laravel-sqlserver"
+      DB_DATABASE: "teste_docker_laravel"
+      DB_USERNAME: "sa"
+      DB_PASSWORD: "ABj!010359"
     networks:
       - laravelnet
 
@@ -23,7 +31,7 @@ services:
       - "1433:1433"
     volumes:
       - sqlserverdata:/var/opt/mssql
-    command: /bin/bash -c "(/opt/mssql/bin/sqlservr &) && sleep 20 && /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'ABj!010359' -Q 'CREATE DATABASE teste_docker_laravel'"
+      - ./init-sql.sh:/docker-entrypoint-initdb.d/init-sql.sh
     restart: unless-stopped
     networks:
       - laravelnet
@@ -31,5 +39,6 @@ services:
 networks:
   laravelnet:
     driver: bridge
+
 volumes:
   sqlserverdata:
