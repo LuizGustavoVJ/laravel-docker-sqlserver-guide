@@ -37,11 +37,22 @@
 
 ## 4. Variáveis de ambiente do Laravel (.env)
 
-```env
-DB_CONNECTION=sqlsrv
-DB_HOST=laravel-sqlserver
-DB_PORT=1433
-DB_DATABASE=teste_docker_laravel
-DB_USERNAME=sa
-DB_PASSWORD=ABj!010359
-DB_OPTIONS='TrustServerCertificate=true'
+- DB_CONNECTION=sqlsrv
+- DB_HOST=laravel-sqlserver
+- DB_PORT=1433
+- DB_DATABASE=teste_docker_laravel
+- DB_USERNAME=sa
+- DB_PASSWORD=ABj!010359
+- DB_OPTIONS='TrustServerCertificate=true'
+
+## 5. Comandos básicos para rodar o ambiente
+
+```bash
+# Construir imagem do app (somente na primeira vez ou após mudar o Dockerfile)
+docker-compose build app
+
+# Subir containers Laravel + SQL Server
+docker-compose up -d
+
+# Verificar logs do app
+docker logs -f laravel-app
