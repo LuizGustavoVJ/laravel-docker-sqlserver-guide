@@ -31,7 +31,10 @@ RUN curl -sSL https://packages.microsoft.com/keys/microsoft.asc \
 
 # 4) Instalação do driver ODBC SQL Server
 RUN apt-get update --fix-missing \
- && ACCEPT_EULA=Y apt-get install -y --fix-missing msodbcsql18
+ && ACCEPT_EULA=Y apt-get install -y --fix-missing msodbcsql18 unixodbc-dev mssql-tools
+
+# Ajuste PATH para encontrar sqlcmd
+ENV PATH="$PATH:/opt/mssql-tools/bin"
 
 # 5) Extensões SQLSRV no PHP
 RUN pecl install sqlsrv pdo_sqlsrv \
