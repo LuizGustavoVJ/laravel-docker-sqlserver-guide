@@ -44,4 +44,4 @@ Para detalhes sobre o `Dockerfile`, `docker-compose.yml`, script de entrada e va
 **Luiz Gustavo Finotello**  
 Especialista em infraestrutura, desenvolvimento web e integração de sistemas.  
 Transformando complexidade técnica em soluções reutilizáveis e bem documentadas.
-🔗 [linkedin.com/in/lgfinotello](https://www.linkedin.com/in/lgfinotello/)
+🔗 Linkedin: https://www.linkedin.com/in/lgfinotello/
