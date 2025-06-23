@@ -1,0 +1,35 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel-app
+    volumes:
+      - ../laravel:/var/www/html
+    working_dir: /var/www/html
+    depends_on:
+      - sqlserver
+    networks:
+      - laravelnet
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: laravel-sqlserver
+    environment:
+      SA_PASSWORD: "ABj!010359"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+    command: /bin/bash -c "(/opt/mssql/bin/sqlservr &) && sleep 20 && /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'ABj!010359' -Q 'CREATE DATABASE teste_docker_laravel'"
+    restart: unless-stopped
+    networks:
+      - laravelnet
+
+networks:
+  laravelnet:
+    driver: bridge
+volumes:
+  sqlserverdata:
