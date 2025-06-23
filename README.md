@@ -20,4 +20,5 @@ Guia prático e direto ao ponto para configurar um ambiente Laravel com SQL Serv
 ```bash
 git clone https://github.com/LuizGustavoVJ/laravel-docker-sqlserver-guide.git
 cd laravel-docker-sqlserver-guide
+cd docker
 docker-compose up -d
